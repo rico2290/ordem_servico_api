@@ -1,0 +1,24 @@
+/**
+ * 
+ */
+package com.rico.ordemservico.domain.repository;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import com.rico.ordemservico.domain.model.Cliente;
+
+/**
+ * @author rico22
+ *
+ */
+@Repository
+public interface ClienteRespository extends JpaRepository<Cliente, Long> {
+
+		List<Cliente> findByNome(String nome);
+		List<Cliente> findByNomeContaining(String nome);
+		Optional<Cliente> findByEmail(String email);
+}
