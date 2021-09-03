@@ -1,9 +1,8 @@
 package com.rico.ordemservico.api.exceptionhandler;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpHeaders;
@@ -19,12 +18,14 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import com.rico.ordemservico.exception.NegocioException;
 
+import lombok.AllArgsConstructor;
 
+@AllArgsConstructor
 
 @ControllerAdvice
 public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 	
-	@Autowired
+	
 	private MessageSource messageSource;
 	
 	@ExceptionHandler(NegocioException.class)
@@ -34,7 +35,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 		Problema problema = new Problema();
 		problema.setStauts(status.value());
 		problema.setTitulo(ne.getMessage());
-		problema.setDataHora(LocalDateTime.now());
+		problema.setDataHora(OffsetDateTime.now());
 		return handleExceptionInternal(ne, problema, new HttpHeaders(), status, request);
 	}
 	
@@ -56,7 +57,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 		problema.setStauts(status.value());
 		problema.setTitulo("Um ou mais campos estão inválidos. "
 				+ "Faça o preenchimento correto e tente novamente");
-		problema.setDataHora(LocalDateTime.now());
+		problema.setDataHora(OffsetDateTime.now());
 		problema.setCampos(campo);
 		
 		

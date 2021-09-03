@@ -14,6 +14,9 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.ctc.wstx.osgi.ValidationSchemaFactoryProviderImpl;
+import com.rico.ordemservico.domain.model.validators.ValidationGroups;
+
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -30,7 +33,8 @@ import lombok.Setter;
 public class Cliente implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-
+	
+	@NotNull(groups =  ValidationGroups.ClienteId.class)
 	@EqualsAndHashCode.Include
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
